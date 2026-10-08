@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Personal Assistant</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .system-status {
+            display: inline-block;
+            margin: 8px 0 20px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .system-status.online {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .system-status.offline {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        #chat-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 18px;
+            cursor: pointer;
+            background: #4f46e5;
+            color: white;
+            font-weight: 600;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .secondary-button {
+            background: #6b7280;
+        }
+
+        .danger-button {
+            background: #dc2626;
+        }
+
+        #response {
+            margin-top: 20px;
+        }
+
+        .task {
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+        }
+
+        .execution-trace {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f5f5f5;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .execution-trace h4 {
+            margin-top: 0;
+        }
+
+        .execution-trace ol {
+            margin-bottom: 0;
+            padding-left: 25px;
+        }
+
+        .execution-trace li {
+            margin-bottom: 6px;
+        }
+
+        .history-item {
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+        }
+
+        .history-completed {
+            border-left: 4px solid #16a34a;
+        }
+
+        .history-failed {
+            border-left: 4px solid #dc2626;
+        }
+
+        .history-pending {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .history-state {
+            font-weight: bold;
+        }
+
+        .approval-box {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+        }
+
+        .approval-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .message {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            background: #eef2ff;
+        }
+
+        @media (max-width: 700px) {
+            #chat-form {
+                flex-direction: column;
+            }
+
+            .history-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Personal Assistant</h1>
+
+    <div id="system-status" class="system-status">
+        Checking system status...
+    </div>
+
+    <!-- Chat -->
+    <div class="card">
+
+        <h2>Ask Assistant</h2>
+
+        <form id="chat-form">
+
+            <input
+                type="text"
+                id="user-input"
+                placeholder="Try: add 10 and 20"
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">
+                Send
+            </button>
+
+        </form>
+
+        <div id="response"></div>
+
+    </div>
+
+    <!-- Task History -->
+    <div class="card">
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>Task History</h2>
+
+            <button
+                id="refresh-history"
+                type="button"
+                class="secondary-button"
+            >
+                Refresh
+            </button>
+        </div>
+
+        <div id="history-list">
+            Loading history...
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+</body>
+</html>
